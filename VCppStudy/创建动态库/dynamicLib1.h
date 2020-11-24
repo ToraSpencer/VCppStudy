@@ -15,6 +15,15 @@
 // 由于本头文件在生成动态库、使用动态库的项目中都要使用，所以需要根据情况来决定是要输出动态库，还是导入动态库。
 
 
+
+/*
+	在传统的非共享动态库中，一部分代码简单地附加到调用的程序中。如果两个程序同时调用同一个子程序，就会出现两份那段代码。
+	当多个程序使用同一个函数库时，DLL可以减少在磁盘和物理内存中加载代码的重复量，且有助于代码的重用。
+
+*/
+
+
+
 // 创建动态库
 /*
 	关键字__declspec
@@ -39,6 +48,14 @@
 #define DLL_API __declspec(dllimport)
 #endif
 
+
+int __declspec(dllexport) __stdcall funci() 
+{
+	return 999;
+}
+
+
+DLL_API void dllDisp(void);
 
 
 namespace MYDLL

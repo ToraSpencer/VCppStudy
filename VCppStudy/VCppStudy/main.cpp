@@ -2,10 +2,14 @@
 #include <string>
 #include "staticLib1.h"
 #include "dynamicLib1.h"
+#include <windows.h>
 
 
 
 using namespace std;
+
+typedef void (__cdecl *pfun)(void);
+typedef int(__stdcall *f_funci)();
 
 
 // 调用静态库
@@ -20,7 +24,10 @@ using namespace std;
 
 
 */
+
 #pragma comment(lib,"staticLib1.lib")			// 如果项目属性->链接器->附加依赖项之中加入了.lib文件，则不需要该预处理命令 
+
+
 void test1_1() 
 {
 	add(1,2);
@@ -46,15 +53,52 @@ void test1_2()
 {
 	MYDLL::disp();
 	MYDLL::calculator calc;
-	cout << "calc.Add(1,2) == " << calc.Add(1, 2) << endl;;
+	cout << "calc.Add(1,2) == " << calc.Add(1, 2) << endl;
+
+
 
 }
 
 
 
+
+// 目前有错误
+void test1_3() 
+{
+
+	pfun pfoo;
+	HINSTANCE hDLL = LoadLibrary(TEXT("D:\\workstation\\gitRepositories\\VCppStudy\\VCppStudy\\Release\\dynamicLib1.dll"));
+
+
+	if (hDLL == NULL)
+	{
+		std::cout << "动态库load错误" << endl;
+		return;
+	}
+
+
+	pfoo = (pfun)GetProcAddress(hDLL, "dllDisp");
+
+	if (pfoo == NULL)
+	{
+		cout << "函数load失败" << endl;
+		return;
+	}
+
+	pfoo();
+
+
+	FreeLibrary(hDLL);
+
+
+}
+
+
+
+
 int main()
 {
-	test1_1();
+ 
 
 	getchar();
     return 0;
