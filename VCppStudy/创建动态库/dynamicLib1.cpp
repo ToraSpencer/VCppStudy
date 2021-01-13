@@ -1,6 +1,10 @@
 #include "dynamicLib1.h"
 
 //  定义 DLL 应用程序的导出函数。
+__declspec(dllexport) int funci()
+{
+	return 999;
+}
 
 
 void dllDisp(void) 

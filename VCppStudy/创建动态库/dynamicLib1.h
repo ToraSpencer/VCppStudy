@@ -48,15 +48,18 @@
 #define DLL_API __declspec(dllimport)
 #endif
 
-
-int __declspec(dllexport) __stdcall funci() 
+extern "C"	// 一定要加上！
 {
-	return 999;
+	/*
+		因为C++的name mangling名字改编机制，导致源文件中函数fun在编译生成的目标文件中名字不是fun，而是fun@@YAHXZ加上参数之类的，
+		所以不使用extern "C"的话GetProcAddress会找不到函数地址。
+	*/
+
+
+	DLL_API int funci();
+
+	DLL_API void dllDisp(void);
 }
-
-
-DLL_API void dllDisp(void);
-
 
 namespace MYDLL
 {

@@ -36,6 +36,7 @@ void test1_1()
 
 
 
+
 // test1_2 调用动态库
 /*
 	有两种方式调用动态库——静态调用、动态调用
@@ -48,49 +49,43 @@ void test1_1()
 					LoadLibrary()
 
 */
-#pragma comment(lib,"dynamicLib1.lib")	// 如果在项目属性->链接器->附加依赖项之中加入.lib文件，则不需要该预处理命令。
-void test1_2() 
-{
-	MYDLL::disp();
-	MYDLL::calculator calc;
-	cout << "calc.Add(1,2) == " << calc.Add(1, 2) << endl;
-
-
-
-}
+//#pragma comment(lib,"dynamicLib1.lib")	// 如果在项目属性->链接器->附加依赖项之中加入.lib文件，则不需要该预处理命令。
+//void test1_2() 
+//{
+//	MYDLL::disp();
+//	MYDLL::calculator calc;
+//	cout << "calc.Add(1,2) == " << calc.Add(1, 2) << endl;
+//
+//}
 
 
 
 
-// 目前有错误
+// 使用WINDOWS系统的HMODULE来调用动态库——目前有错误，动态库句柄可以取到值，但是函数指针无法从动态库句柄中取函数地址。
+HMODULE Hdll = nullptr;
+using pDDD = double(*)(double, double);
+using pVV = void(*)(void);
+typedef void (fVV)(void);
+using pIV = int(*)(void);
+pDDD pfuncD = nullptr;
+fVV* pfuncV = nullptr;
+pIV pfuncI = nullptr;
 void test1_3() 
 {
+	cout << "start:" << endl;
 
-	pfun pfoo;
-	HINSTANCE hDLL = LoadLibrary(TEXT("D:\\workstation\\gitRepositories\\VCppStudy\\VCppStudy\\Release\\dynamicLib1.dll"));
-
-
-	if (hDLL == NULL)
+	Hdll = LoadLibrary(L"dynamicLib1.dll");
+ 
+	if (nullptr == Hdll) 
 	{
-		std::cout << "动态库load错误" << endl;
-		return;
+		cout << "加载动态库失败" << endl;
 	}
-
-
-	pfoo = (pfun)GetProcAddress(hDLL, "dllDisp");
-
-	if (pfoo == NULL)
+	else 
 	{
-		cout << "函数load失败" << endl;
-		return;
+		pfuncI = (pIV)(GetProcAddress(Hdll, "funci"));
+		int num = (*pfuncI)();
+		cout << num << endl;
 	}
-
-	pfoo();
-
-
-	FreeLibrary(hDLL);
-
-
 }
 
 
@@ -98,7 +93,7 @@ void test1_3()
 
 int main()
 {
- 
+	test1_3();
 
 	getchar();
     return 0;
