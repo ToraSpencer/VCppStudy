@@ -54,17 +54,21 @@ extern "C"	// 一定要加上！
 		因为C++的name mangling名字改编机制，导致源文件中函数fun在编译生成的目标文件中名字不是fun，而是fun@@YAHXZ加上参数之类的，
 		所以不使用extern "C"的话GetProcAddress会找不到函数地址。
 	*/
-
-
 	DLL_API int funci();
 
 	DLL_API void dllDisp(void);
+
 }
+
 
 namespace MYDLL
 {
 	// 1. DLL中定义函数
-	DLL_API void disp(void);
+	extern "C" 
+	{
+		DLL_API void disp(void);
+	}
+	
 
 
 	// 2. DLL中自定义类
@@ -84,3 +88,4 @@ namespace MYDLL
 
 }
 
+ 

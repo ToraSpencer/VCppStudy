@@ -47,34 +47,30 @@ void test1_1()
 					只需要DLL文件和头文件，不需要LIB文件
 					通过调用windowsAPI来加载和卸载DLL
 					LoadLibrary()
-
 */
-//#pragma comment(lib,"dynamicLib1.lib")	// 如果在项目属性->链接器->附加依赖项之中加入.lib文件，则不需要该预处理命令。
-//void test1_2() 
-//{
-//	MYDLL::disp();
-//	MYDLL::calculator calc;
-//	cout << "calc.Add(1,2) == " << calc.Add(1, 2) << endl;
-//
-//}
+#pragma comment(lib,"dynamicLib1.lib")	// 如果在项目属性->链接器->附加依赖项之中加入.lib文件，则不需要该预处理命令。
+void test1_2() 
+{
+	MYDLL::disp();
+	MYDLL::calculator calc;
+	cout << "calc.Add(1,2) == " << calc.Add(1, 2) << endl;
 
+}
 
 
 
 // 使用WINDOWS系统的HMODULE来调用动态库——目前有错误，动态库句柄可以取到值，但是函数指针无法从动态库句柄中取函数地址。
-HMODULE Hdll = nullptr;
-using pDDD = double(*)(double, double);
-using pVV = void(*)(void);
-typedef void (fVV)(void);
-using pIV = int(*)(void);
-pDDD pfuncD = nullptr;
-fVV* pfuncV = nullptr;
-pIV pfuncI = nullptr;
 void test1_3() 
 {
-	cout << "start:" << endl;
+	HMODULE Hdll = nullptr;
+	using pDDD = double(*)(double, double);
+	using pVV = void(*)(void);
+	using pIV = int(*)(void);
+	pDDD pfuncD = nullptr;
+	pIV pfuncI = nullptr;
+	pVV pfuncV = nullptr;
 
-	Hdll = LoadLibrary(L"dynamicLib1.dll");
+	Hdll = LoadLibrary(L"../Release/dynamicLib1.dll");
  
 	if (nullptr == Hdll) 
 	{
@@ -82,9 +78,9 @@ void test1_3()
 	}
 	else 
 	{
-		pfuncI = (pIV)(GetProcAddress(Hdll, "funci"));
-		int num = (*pfuncI)();
-		cout << num << endl;
+		pfuncV = (pVV)(GetProcAddress(Hdll, "dllDisp"));	
+		(*pfuncV)();
+ 
 	}
 }
 
