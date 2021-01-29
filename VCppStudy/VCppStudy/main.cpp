@@ -80,8 +80,27 @@ void test1_3()
 	{
 		pfuncV = (pVV)(GetProcAddress(Hdll, "dllDisp"));	
 		(*pfuncV)();
- 
 	}
+
+	FreeLibrary(Hdll);
+
+	if (Hdll == nullptr) 
+	{
+		cout << "DLL释放成功" << endl;
+	}
+
+	Hdll = LoadLibrary(L"../Release/dynamicLib1.dll");
+
+	if (nullptr == Hdll)
+	{
+		cout << "加载动态库失败" << endl;
+	}
+	else
+	{
+		pfuncV = (pVV)(GetProcAddress(Hdll, "dllDisp"));
+		(*pfuncV)();
+	}
+
 }
 
 
