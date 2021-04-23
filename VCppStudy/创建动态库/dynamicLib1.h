@@ -6,11 +6,11 @@
 //		将 _WIN32_WINNT 宏设置为要支持的平台，然后再包括 SDKDDKVer.h。
 #include <SDKDDKVer.h>	
 
-#define WIN32_LEAN_AND_MEAN             // 从 Windows 头中排除极少使用的资料
+//#define WIN32_LEAN_AND_MEAN             // 从 Windows 头中排除极少使用的资料
 #include <windows.h>					// Windows 头文件: 
 #endif
 #include <iostream>
-
+#include <locale>
 
 // 由于本头文件在生成动态库、使用动态库的项目中都要使用，所以需要根据情况来决定是要输出动态库，还是导入动态库。
 
@@ -67,6 +67,7 @@ namespace MYDLL
 	extern "C" 
 	{
 		DLL_API void disp(void);
+		DLL_API void printCurrentPath(void);
 	}
 	
 

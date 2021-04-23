@@ -18,6 +18,14 @@ void MYDLL::disp(void)
 	std::cout << "调用了动态库dynamicLib1中的MYDLL::disp()函数" << std::endl;
 }
 
+void MYDLL::printCurrentPath(void)
+{
+	TCHAR path[MAX_PATH + 1];
+	GetModuleFileName(nullptr, path, MAX_PATH);
+	std::wcout.imbue(std::locale(std::locale(), "", LC_CTYPE));
+	std::wcout << path << std::endl;
+}
+
 
 
 double MYDLL::calculator::Add(double a, double b)
