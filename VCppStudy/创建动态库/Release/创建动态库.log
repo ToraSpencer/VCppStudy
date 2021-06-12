@@ -1,0 +1,24 @@
+﻿  dllmain.cpp
+  dynamicLib1.cpp
+D:\workstation\gitRepositories\VCppStudy\VCppStudy\创建动态库\dynamicLib1.cpp(5,1): warning C4273: “funci”: dll 链接不一致
+D:\workstation\gitRepositories\VCppStudy\VCppStudy\创建动态库\dynamicLib1.h(57,14): message : 参见“funci”的前一个定义
+D:\workstation\gitRepositories\VCppStudy\VCppStudy\创建动态库\dynamicLib1.cpp(11,1): warning C4273: “dllDisp”: dll 链接不一致
+D:\workstation\gitRepositories\VCppStudy\VCppStudy\创建动态库\dynamicLib1.h(59,15): message : 参见“dllDisp”的前一个定义
+D:\workstation\gitRepositories\VCppStudy\VCppStudy\创建动态库\dynamicLib1.cpp(17,1): warning C4273: “MYDLL::disp”: dll 链接不一致
+D:\workstation\gitRepositories\VCppStudy\VCppStudy\创建动态库\dynamicLib1.h(69,16): message : 参见“disp”的前一个定义
+D:\workstation\gitRepositories\VCppStudy\VCppStudy\创建动态库\dynamicLib1.cpp(22,1): warning C4273: “MYDLL::printCurrentPath”: dll 链接不一致
+D:\workstation\gitRepositories\VCppStudy\VCppStudy\创建动态库\dynamicLib1.h(70,16): message : 参见“printCurrentPath”的前一个定义
+D:\workstation\gitRepositories\VCppStudy\VCppStudy\创建动态库\dynamicLib1.cpp(33,1): warning C4273: “MYDLL::calculator::Add”: dll 链接不一致
+D:\workstation\gitRepositories\VCppStudy\VCppStudy\创建动态库\dynamicLib1.h(80,10): message : 参见“Add”的前一个定义
+D:\workstation\gitRepositories\VCppStudy\VCppStudy\创建动态库\dynamicLib1.cpp(42,1): warning C4273: “MYDLL::calculator::Subtract”: dll 链接不一致
+D:\workstation\gitRepositories\VCppStudy\VCppStudy\创建动态库\dynamicLib1.h(82,10): message : 参见“Subtract”的前一个定义
+D:\workstation\gitRepositories\VCppStudy\VCppStudy\创建动态库\dynamicLib1.cpp(51,1): warning C4273: “MYDLL::calculator::Multiply”: dll 链接不一致
+D:\workstation\gitRepositories\VCppStudy\VCppStudy\创建动态库\dynamicLib1.h(84,10): message : 参见“Multiply”的前一个定义
+D:\workstation\gitRepositories\VCppStudy\VCppStudy\创建动态库\dynamicLib1.cpp(60,1): warning C4273: “MYDLL::calculator::Divide”: dll 链接不一致
+D:\workstation\gitRepositories\VCppStudy\VCppStudy\创建动态库\dynamicLib1.h(86,10): message : 参见“Divide”的前一个定义
+    正在创建库 D:\workstation\gitRepositories\VCppStudy\VCppStudy\Release\dynamicLib1.lib 和对象 D:\workstation\gitRepositories\VCppStudy\VCppStudy\Release\dynamicLib1.exp
+  正在生成代码
+  Previous IPDB not found, fall back to full compilation.
+  All 102 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  已完成代码的生成
+  创建动态库.vcxproj -> D:\workstation\gitRepositories\VCppStudy\VCppStudy\Release\dynamicLib1.dll

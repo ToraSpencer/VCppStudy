@@ -251,6 +251,60 @@ namespace CONFIG
 
 
 
+
+// windows多线程
+namespace MULTITHREAD
+{
+	HANDLE hMutex = NULL;//互斥量
+
+	DWORD WINAPI Fun(LPVOID lpParamter)
+	{
+		for (int i = 0; i < 10; i++)
+		{
+			//请求一个互斥量锁
+			WaitForSingleObject(hMutex, INFINITE);
+			cout << "A Thread Fun Display!" << endl;
+			Sleep(100);
+			//释放互斥量锁
+			ReleaseMutex(hMutex);
+		}
+		return 0L;//表示返回的是long型的0
+
+	}
+
+	void test1()
+	{
+		HANDLE hThread = CreateThread(NULL, 0, Fun, NULL, 0, NULL);
+		hMutex = CreateMutex(NULL, FALSE, L"screen");
+
+		//关闭线程句柄
+		if (hThread != nullptr) 
+		{
+			CloseHandle(hThread);
+		}
+	
+		//主线程的执行路径
+		for (int i = 0; i < 10; i++)
+		{
+			//请求获得一个互斥量锁
+			if (hMutex != nullptr) 
+			{
+				WaitForSingleObject(hMutex, INFINITE);
+			}
+			
+			cout << "Main Thread Display!" << endl;
+			Sleep(100);
+
+			//释放互斥量锁
+			if (hMutex != nullptr)
+			{
+				ReleaseMutex(hMutex);
+			}
+		}
+	}
+}
+
+
 // 暂时无法分类
 namespace GENERAL_VCPP 
 {
@@ -267,8 +321,8 @@ namespace GENERAL_VCPP
 
 int main()
 {
-	GENERAL_VCPP::test0();
-	getchar();
+	MULTITHREAD::test1();
+
     return 0;
 }
 
