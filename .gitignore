@@ -2,9 +2,18 @@
 *.dll
 *.exe
 *.ipch
+*.pch
 *.sdf
 *.ncb
- 
+*.tlog
+*.obj
+*.iobj
+*.pdb
+*.ipdb
+*.exp
+*.log
+*.recipe
+*.lib
 
 
 *.vcxproj.user
@@ -21,4 +30,4 @@ x64/
 Debug/
 Bin_Debug/
 Win32_Debug/
-
+ 
